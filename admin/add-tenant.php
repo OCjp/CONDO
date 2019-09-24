@@ -4,23 +4,21 @@
         header('location: ../index.php');
     }
     require_once '../classes/mngDAO.php';
-    $roomdao = new ManageAccessO;
-    $id = $_GET['id'];
-    $getroom = $roomdao->getOneRoom($id);
+    $addtenant = new ManageAccessO;
 
+    //issetは空欄があったら実行しないみたいな意味。
     if(isset($_POST['resister'])){
-
-       
-        $roomno = $_POST['roomNo'];
+        $name = $_POST['name'];
+        $call = $_POST['call'];
+        $mail = $_POST['mail'];
+        $room = $_POST['room'];
         $build = $_POST['build'];
-        $vacancy = $_POST['vacancy'];
-        $contdate = $_POST['contDate'];
-        $findate = $_POST['finDate'];
-        $tenant = $_POST['tenant'];
-        $facility = $_POST['facility'];
-
-        $roomdao->roomUpdate($id,$roomno,$build,$vacancy,$contdate,$findate,$tenant,$facility);
-        
+        $age = $_POST['age'];
+        $start = $_POST['startDate'];
+        $fin = $_POST['finDate'];
+   
+        $addtenant->addTenant($name,$call,$mail,$room,$build,$age,$start,$fin);
+        //header('Location: form-fin.php');
     }
 ?>
 <!DOCTYPE html>
@@ -51,21 +49,21 @@
                     <a class="nav-link js-scroll-trigger" href="rooms.php">Rooms</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link js-scroll-trigger" href="tenant.php">Tenants</a>
+                    <a class="nav-link js-scroll-trigger" href="tenant.php">tenants</a>
                 </li>
                 </ul>
             </div>
         </div>
     </nav>
+    <br><br><br>
     </div>
-    <br><br>
     <!-- Here is Search and Add Rooms.-->
     <div class="container-fluid">
         <div class="jumbotron mt-4">
-            <h3>*Edit Room's detail..</h3>
+            <h3>*Resister a New Tenant*</h3>
             <hr class="my-4">
             <div class="container text-right">
-            <p>Go back to the page of rooms.</p>
+            <p>Go back to the page of Tenants.</p>
             <a class="btn btn-danger btn-lg" href="rooms.php" role="button">Back</a>
             </div>
         </div>
@@ -74,49 +72,41 @@
     <div class="container">
         <form action="" method="post">
             <div class="form-group">
-                <label for="roomNo">Room No. : </label>
-                <input type="text" name="roomNo" class="form-control" value="<?php echo $getroom['room_no'];?>">
+                <label for="name">Name : </label>
+                <input type="text" name="name" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="age">Age : </label>
+                <input type="text" name="age" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="call">Call No. : </label>
+                <input type="text" name="call" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="mail">E-mail : </label>
+                <input type="email" name="mail" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="room">Room No. : </label>
+                <input type="text" name="room" class="form-control">
             </div>
             <div class="form-group">
                 <label for="build">Building : </label>
-                <input type="text" name="build" class="form-control" value="<?php echo $getroom['building'];?>">
+                <input type="text" name="build" class="form-control">
             </div>
             <div class="form-group">
-                <label for="build">vacancy : </label>
-                <select name="vacancy" class="form-control" id="" value="<?php echo $getroom['vacancy'];?>">
-                    <?php
-                        switch($getroom['vacancy']){
-                            case "V":
-                                echo "<option value='V' selected>Vacant</option>";
-                                echo "<option value='I'>tenant IN </option>";
-                                break;
-                            case "I":
-                                echo "<option value='V'>Vacant</option>";
-                                echo "<option value='I' selected>tenant IN </option>";
-                                break;
-                            default:
-                                echo "No options";
-                        }
-                    ?>
-                </select>
+                <div class="form-group">
+                    <h6>Contract Date</h6>
+                    <label for="startDate">Start Date ~</label>
+                    <input type="date" name="startDate" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="finDate">~Expire Date </label>
+                    <input type="date" name="finDate" class="form-control">
+                </div>
             </div>
-            <div class="form-group">
-                <label for="contDate">Contract Date : </label>
-                <input type="date" name="contDate" class="form-control" value="<?php echo $getroom['contract_date'];?>">
-            </div>
-            <div class="form-group">
-                <label for="finDate">Contract Finish Date : </label>
-                <input type="date" name="finDate" class="form-control" value="<?php echo $getroom['contract_fin_date'];?>">
-            </div>
-            <div class="form-group">
-                <label for="tenant">Tenant : </label>
-                <input type="text" name="tenant" class="form-control" value="<?php echo $getroom['tenant'];?>">
-            </div>
-            <div class="form-group">
-                <label for="facility">Facilities : </label>
-                <textarea name="facility" id="" cols="30" rows="10" class="form-control"><?php echo $getroom['facility'];?></textarea>
-            </div>
-            <input type="submit" value="Update" name="resister" class="form-control btn btn-warning">
+            <input type="submit" value="New Resistration" name="resister" class="form-control btn btn-warning">
         </form>
         
     </div>

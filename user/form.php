@@ -3,22 +3,7 @@
    if($_SESSION['logstatus'] !=TRUE OR $_SESSION['user_type'] !='USER'){
        header('location: ../index.php');
    }
-   require_once '../classes/userDAO.php';
-   $form = new UserAccessO;
-    //issetは空欄があったら実行しないみたいな意味。
-    if(isset($_POST['resister'])){
-        $uname = $_POST['name'];
-        $call = $_POST['call'];
-        $mail = $_POST['mail'];
-        $roomno = $_POST['roomno'];
-        $build = $_POST['build'];
-        $date = $_POST['date'];
-        $other = $_POST['question'];
-       
-        $form->addForm($uname,$call,$mail,$roomno,$build,$date,$other);
-        header('Location: form-fin.php');
-        //ここのヘッダーが多分上のを読み込んでる。
-    }
+  
 
 ?>
 <!DOCTYPE html>

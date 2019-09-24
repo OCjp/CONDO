@@ -5,24 +5,7 @@
     }
     require_once '../classes/mngDAO.php';
     $info = new ManageAccessO;
-    $catchapp = $info->getapp();
-    
-    // $id = $_GET['id'];
-    // $appinfo = $info->getOneApp($id);
-    // if(isset($_POST['update'])){
-    //     $appname = $_POST['app_name'];
-    //     $call = $_POST['app_call_no'];
-    //     $mail = $_POST['app_mail'];
-    //     $roomno = $_POST['app_room_no'];
-    //     $build = $_POST['app_build_name'];
-    //     $desireDate = $_POST['app_desire_date'];
-    //     $getDate = $_POST['datereg'];
-
-    //     $other = $_POST['status'];
-    //     $info->updateApp($appname,$call,$mail,$roomno,$build,$desireDate,$getDate,$other);
-    //     //header('Location: retrieve.php');
-    
-    // }
+    $catchTenant = $info->getTenant();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -61,11 +44,15 @@
     </nav>
 </div>
     <br /><br />
-    <!-- Here is Retrieve application.-->
+    <!-- Here is Retrieve Tenants.-->
     <div class="container-fluid">
         <div class="jumbotron mt-4">
-            <h3>Accepted Application</h3>
-           
+            <h3>*Tenants</h3>
+            <hr class="my-4">
+            <div class="container text-right">
+                <p>Resister new tenants.</p>
+                <a class="btn btn-primary btn-lg" href="add-tenant.php" role="button">Add Tenants</a>
+            </div>
         </div>
     </div>
     <!-- Body -->
@@ -74,33 +61,32 @@
             <thead class="thead-dark">
                 <th>#</th>
                 <th>Castamer name</th>
+                <th>age</th>
                 <th>Tel No.</th>
                 <th>E-mail</th>
                 <th>Room No.</th>
                 <th>Building</th>
-                <th>Desire Date</th>
-                <th>Accepted Date</th>
-                <th>Other</th>
-                <th>Status</th>
+                <th>Start Date</th>
+                <th>Finish Date</th>
                 <th></th>
                 <th></th>
             </thead>
             <tbody>
             <?php
-                foreach($catchapp as $key=>$values){
+                foreach($catchTenant as $key=>$values){
                     echo "<tr>";
-                        echo "<td>".$values['app_id']."</td>";
-                        echo "<td>".$values['app_name']."</td>";
-                        echo "<td>".$values['app_call_no']."</td>";
-                        echo "<td>".$values['app_mail']."</td>";
-                        echo "<td>".$values['app_room_no']."</td>";
-                        echo "<td>".$values['app_build_name']."</td>";
-                        echo "<td>".$values['app_desire_date']."</td>";
-                        echo "<td>".$values['app_get_date']."</td>";
-                        echo "<td>".$values['app_other']."</td>";
-                        echo "<td>".$values['app_status']."</td>";
-                        echo "<td><a href='####.php?id=".$values['app_id']."' role='button' class='btn btn-success'>Done</a></td>";
-                        echo "<td><a href='delete.php?id=".$values['app_id']."' role='button' class='btn btn-danger'>Delete</a></td>";
+                        echo "<td>".$values['tenant_id']."</td>";
+                        echo "<td>".$values['tenant_name']."</td>";
+                        echo "<td>".$values['age']."</td>";
+                        echo "<td>".$values['tenant_call_no']."</td>";
+                        echo "<td>".$values['tenant_mail']."</td>";
+                        echo "<td>".$values['room_no']."</td>";
+                        echo "<td>".$values['build_name']."</td>";
+                        
+                        echo "<td>".$values['contract_term_start']."</td>";
+                        echo "<td>".$values['contract_term_fin']."</td>";
+                        echo "<td><a href='user-detail.php?id=".$values['tenant_id']."' role='button' class='btn btn-warning'>Detail</a></td>";
+                        echo "<td><a href='delete.php?id=".$values['tenant_id']."' role='button' class='btn btn-danger'>Delete</a></td>";
                     echo "</tr>";
                 }
             ?>

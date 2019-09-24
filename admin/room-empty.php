@@ -6,7 +6,7 @@
 
     require_once '../classes/mngDAO.php';
     $info = new ManageAccessO;
-    $catchroom = $info->getRoom();
+    $catchroomE = $info->getRoomEmpty();
     
 ?>
 <!DOCTYPE html>
@@ -51,7 +51,7 @@
     <!-- Here is Search and Add Rooms.-->
     <div class="container-fluid">
         <div class="jumbotron mt-4">
-            <h3>*Rooms</h3>
+            <h3>*Vacant Rooms</h3>
             <hr class="my-4">
 
 
@@ -83,7 +83,7 @@
             </thead>
             <tbody>
             <?php
-                foreach($catchroom as $key=>$values){
+                foreach($catchroomE as $key=>$values){
                     echo "<tr>";
                         echo "<td>".$values['room_id']."</td>";
                         echo "<td>".$values['room_no']."</td>";

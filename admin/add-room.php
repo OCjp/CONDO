@@ -15,8 +15,10 @@
         $facility = $_POST['facility'];
    
         $addRoom->addRoom($roomno,$build,$contDate,$finDate,$tenant,$facility);
-        //header('Location: form-fin.php');
+        //header('Location: ../admin/rooms.php');
+
     }
+    
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -46,7 +48,7 @@
                     <a class="nav-link js-scroll-trigger" href="rooms.php">Rooms</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link js-scroll-trigger" href="users.php">Users</a>
+                    <a class="nav-link js-scroll-trigger" href="tenant.php">tenants</a>
                 </li>
                 </ul>
             </div>
